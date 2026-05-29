@@ -135,3 +135,5 @@ The AI Quiz Generation tool is located in the **Admin Panel** under **AI Quiz Bu
 - **Prompt Engineering**: The backend passes structured guidelines requesting `MCQs`, `4 options`, `correct indices`, and a `logical explanation` tuned to a specific difficulty level ('easy', 'medium', 'hard').
 - **JSON Structure**: Uses OpenAI's `response_format: { type: "json_object" }` to parse JSON blocks without issues.
 - **Fail-safe Sandbox**: If the system runs without a valid `OPENAI_API_KEY` (e.g. `mock_key_for_now`), it falls back to creating high-fidelity sandbox mock quizzes so you can safely test the MERN schema pipeline without errors.
+
+
