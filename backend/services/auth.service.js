@@ -16,6 +16,7 @@ export const registerUserService = async (data) => {
   //role
 
   const userCount = await User.countDocuments();
+
   const roleName = userCount == 0 ? "admin" : "user";
 
   //TODO:

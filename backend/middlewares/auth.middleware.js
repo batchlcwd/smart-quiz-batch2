@@ -9,10 +9,12 @@ export const authMiddleware = async (req, res, next) => {
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer")
     ) {
+      // Bearer sadahsgop
       token = req.headers.authorization.substring(7);
 
       const payload = await jwt.verify(token, process.env.JWT_SECRET);
-      const user = User.findOne({ _id: payload.id });
+      const user = await User.findOne({ _id: payload.id }).populate("role");
+      console.log(user);
       req.user = user;
       next();
     } else {
