@@ -8,6 +8,7 @@ const app = express();
 import "./utils/db.js";
 
 import authRouter from "./routes/auth.route.js";
+import categoryRouter from "./routes/category.route.js";
 
 //middleware- helps to parse json
 const jsonMiddleware = express.json();
@@ -16,6 +17,7 @@ app.use(jsonMiddleware);
 //attach routes
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1", categoryRouter);
 
 // app.get("/", (req, resp) => {
 //   resp.json({
