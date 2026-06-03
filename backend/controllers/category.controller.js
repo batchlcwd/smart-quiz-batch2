@@ -16,7 +16,7 @@ export const createCategory = async (req, resp) => {
       name,
       description,
       slug,
-    });
+    }); 
 
     console.log("creating category");
     return resp.json({
