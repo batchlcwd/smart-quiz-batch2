@@ -73,8 +73,11 @@ export const updateQuestion = async (req, resp) => {
     }
 
     if (text) question.text = text;
+
     if (options) question.options = options;
+
     if (image !== undefined) question.image = image;
+    
     if (correctAnswer) {
       const opts = options || question.options;
       if (!Array.isArray(correctAnswer) || correctAnswer.length === 0) {

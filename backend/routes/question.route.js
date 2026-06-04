@@ -13,9 +13,15 @@ const questionRouter = express.Router();
 // Apply auth and admin check only to /questions routes
 questionRouter.use("/questions", authMiddleware, roleCheckMiddleware);
 
+//creating questions
 questionRouter.post("/questions", createQuestion);
+
+//updating questions
 questionRouter.put("/questions/:id", updateQuestion);
+//deleting questions
 questionRouter.delete("/questions/:id", deleteQuestion);
+
+// Bulk upload questions
 questionRouter.post("/questions/bulk/:quizId", bulkUploadQuestions);
 
 export default questionRouter;
