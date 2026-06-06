@@ -50,12 +50,17 @@ export const submitAttempt = async (userId, attemptId, submissionData) => {
   const { answers, timeTaken } = submissionData;
 
   const attempt = await QuizAttempt.findOne({ _id: attemptId, user: userId }).populate("quiz");
+  
   if (!attempt) {
     throw new Error("Quiz attempt not found");
   }
+
+
   if (attempt.isCompleted) {
     throw new Error("Attempt has already been submitted");
   }
+
+
 
   // Fetch all questions for this quiz to grade
   const questions = await Question.find({ quiz: attempt.quiz._id });
@@ -65,9 +70,19 @@ export const submitAttempt = async (userId, attemptId, submissionData) => {
 
   // Map submission answers by questionId for fast lookup
   const submissionMap = new Map();
+
+  //123--> [1,2,3]
+  //23525->[3]
+  //225352-->[2]
+
+
+
   answers.forEach((ans) => {
+
     const qId = ans.questionId || ans.question;
+
     submissionMap.set(qId.toString(), ans.selectedAnswers);
+
   });
 
   let correctAnswersCount = 0;
@@ -81,8 +96,7 @@ export const submitAttempt = async (userId, attemptId, submissionData) => {
     const sortedSelected = [...selected].sort((a, b) => a - b);
     const sortedCorrect = [...question.correctAnswer].sort((a, b) => a - b);
     
-    const isCorrect = 
-      sortedSelected.length === sortedCorrect.length && 
+    const isCorrect = sortedSelected.length === sortedCorrect.length && 
       sortedSelected.every((val, index) => val === sortedCorrect[index]);
 
     if (isCorrect) {

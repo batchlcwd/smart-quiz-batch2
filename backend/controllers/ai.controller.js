@@ -1,5 +1,5 @@
 import * as aiService from "../services/ai.service.js";
-
+import openAiClient from "../utils/openConfig.js";
 export const generateQuiz = async (req, resp) => {
   try {
     const { topic, difficulty, numQuestions, categoryId } = req.body;
@@ -30,3 +30,10 @@ export const generateQuiz = async (req, resp) => {
     });
   }
 };
+
+
+export const askAI=async(req,resp)=>{
+// call ai
+
+return resp.send("AI" )
+}
