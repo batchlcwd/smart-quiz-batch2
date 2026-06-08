@@ -1,3 +1,4 @@
+import AIResponse from "../models/airesponse.model.js";
 import * as aiService from "../services/ai.service.js";
 import openAiClient from "../utils/openConfig.js";
 export const generateQuiz = async (req, resp) => {
@@ -35,5 +36,32 @@ export const generateQuiz = async (req, resp) => {
 export const askAI=async(req,resp)=>{
 // call ai
 
-return resp.send("AI" )
+if(!req.body?.prompt){
+  return resp.status(400).json({
+    message:"Prompt is required"
+  })
+}
+
+const {prompt}=req.body
+
+
+const response=await openAiClient.responses.create({
+   model: process.env.MODEL_NAME,
+   input:prompt
+})
+
+console.log(response)
+
+//save database:
+await AIResponse.create({
+    prompt:prompt,
+    response:response.output_text,
+    user:req.user._id
+})
+
+return resp.status(200).json({
+  status:"success",
+  message:"AI response",
+  data:response.output_text
+})
 }

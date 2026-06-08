@@ -3,12 +3,8 @@ import Quiz from "../models/quiz.model.js";
 import Question from "../models/question.model.js";
 import Category from "../models/category.model.js";
 
-// Initialize OpenAI client
-const apiKey = process.env.OPENAI_API_KEY;
-const openai = new OpenAI({
-  apiKey: apiKey === "mock_key_for_now" ? "dummy" : apiKey,
-});
-
+import openAiClient from "../utils/openConfig.js";
+const apiKey= process.env.OPENAI_API_KEY;
 /**
  * Generate quiz questions using OpenAI LLM and store to DB
  * @param {string} topic - The topic of the quiz
@@ -24,18 +20,24 @@ export const generateQuiz = async (topic, difficulty, numQuestions, categoryId, 
     throw new Error("Category not found");
   }
 
+
+
+
+
   let quizData = null;
+
 
   // Check if we should use mock fallback (valid keys start with sk-)
   if (!apiKey || apiKey === "mock_key_for_now" || !apiKey.startsWith("sk-")) {
     console.log("Using Mock AI Quiz Generator (no valid OpenAI key provided or default dummy key detected)");
-    quizData = generateMockQuiz(topic, difficulty, numQuestions);
+    throw new Error("Invalid AI API  Key !!")
+  //  quizData = generateMockQuiz(topic, difficulty, numQuestions);
   } else {
     // Attempt actual OpenAI API call with retry mechanism
     let retries = 3;
     while (retries > 0 && !quizData) {
       try {
-        const response = await openai.chat.completions.create({
+        const response = await openAiClient.chat.completions.create({
           model: "gpt-4o-mini", // Cost-effective and structured JSON capable
           messages: [
             {
