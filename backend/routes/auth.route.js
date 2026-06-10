@@ -7,8 +7,9 @@ import {
 } from "../controllers/auth.controller.js";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
 import { roleCheckMiddleware } from "../middlewares/roleCheckMiddleware.js";
+import errorHandler from "../utils/errorHandler.js";
 const authRouter = express.Router();
-authRouter.post("/register", registerUser);
+authRouter.post("/register", errorHandler(registerUser));
 authRouter.post("/login", loginUser);
 authRouter.post(
   "/change-user-role",

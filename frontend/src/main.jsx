@@ -10,9 +10,12 @@ import DashboardPage from "./pages/protected/DashboardPage.jsx";
 import AppLayout from "./pages/public/AppLayout.jsx";
 import { ThemeProvider } from "next-themes";
 import FeaturesPage from "./pages/public/FeaturesPage.jsx";
+import { Toaster } from "react-hot-toast";
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
+  
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <Toaster />
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
@@ -22,6 +25,8 @@ createRoot(document.getElementById("root")).render(
           <Route path="dashboard" element={<DashboardPage />} />
         </Route>
       </Routes>
+    
     </ThemeProvider>
+   
   </BrowserRouter>,
 );
