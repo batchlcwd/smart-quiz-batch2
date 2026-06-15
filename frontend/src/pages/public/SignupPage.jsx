@@ -18,7 +18,9 @@ import { LogIn, User2 } from "lucide-react";
 
 import { signUpUser } from "../../services/auth.service";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 function SignupPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -55,13 +57,19 @@ function SignupPage() {
       setLoading(true);
       const responseData = await signUpUser(formData);
       toast.success("Signup successful!");
+      //data clean form
+      setFormData({
+        email: "",
+        name: "",
+        password: "",
+      });
       console.log(responseData);
+      navigate("/login");
     } catch (error) {
       console.log(error.response);
-      setError(error.response.data.message)
+      setError(error.response.data.message);
       toast.error(error.response.data.message);
-    }
-    finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -80,6 +88,8 @@ function SignupPage() {
           <CardDescription>Signup to explore the quizzes..</CardDescription>
         </CardHeader>
         <CardContent>
+          <div>{error && <p className="text-red-500">{error}</p>}</div>
+
           <form
             onSubmit={handleFormSubmit}
             className="flex  flex-col gap-3 mt-3"
@@ -125,9 +135,7 @@ function SignupPage() {
 
             <div className="flex justify-center gap-2">
               <Button disabled={loading} type="submit" size="lg">
-                {
-                  loading ? "Creating account..." : "Signup"
-                }
+                {loading ? "Creating account..." : "Signup"}
               </Button>
               <Button type="reset" size="lg" variant="destructive">
                 Clear

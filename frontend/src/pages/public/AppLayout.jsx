@@ -1,8 +1,8 @@
-import React from 'react'
-import MyNavbar from '../../components/shared/MyNavbar'
-import Footer from '../../components/shared/Footer'
-import { Outlet } from 'react-router'
-import { Toaster } from 'react-hot-toast'
+import React from "react";
+import MyNavbar from "../../components/shared/MyNavbar";
+import Footer from "../../components/shared/Footer";
+import { Outlet } from "react-router";
+import { Toaster } from "react-hot-toast";
 
 function AppLayout() {
   return (
@@ -12,9 +12,9 @@ function AppLayout() {
         <Outlet />
       </div>
       <Footer />
-      <Toaster position="top-center" reverseOrder={false} />
+      {/* <Toaster position="top-center" reverseOrder={false} /> */}
     </div>
-  )
+  );
 }
 
-export default AppLayout
+export default AppLayout;
