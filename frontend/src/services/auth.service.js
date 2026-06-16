@@ -11,3 +11,18 @@ export const loginUser=async(loginData)=>{
     const response=await axiosClient.post('/auth/login',loginData)
     return response.data
 }
+
+export const updateProfile = async (profileData) => {
+  const response = await axiosClient.put("/users/profile", profileData);
+  return response.data;
+};
+
+export const updatePassword = async (passwordData) => {
+  const response = await axiosClient.put("/users/password", passwordData);
+  return response.data;
+};
+
+export const changeUserRole = async (userId, roleName) => {
+  const response = await axiosClient.post("/auth/change-user-role", { userId, role: roleName });
+  return response.data;
+};

@@ -5,6 +5,7 @@ import {
   updatePassword,
   getAllUsers,
   updateUserStatus,
+  updateUserByAdmin,
 } from "../controllers/user.controller.js";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
 import { roleCheckMiddleware } from "../middlewares/roleCheckMiddleware.js";
@@ -21,6 +22,7 @@ userRouter.put("/users/password", updatePassword);
 
 // Admin-only user management routes
 userRouter.get("/users", roleCheckMiddleware, getAllUsers);
+userRouter.put("/users/:userId", roleCheckMiddleware, updateUserByAdmin);
 userRouter.patch("/users/:userId/status", roleCheckMiddleware, updateUserStatus);
 
 export default userRouter;

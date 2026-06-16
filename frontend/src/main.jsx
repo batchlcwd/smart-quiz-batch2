@@ -20,6 +20,7 @@ import GenerateQuizPage from "./pages/protected/GenerateQuizPage.jsx";
 import ManageQuizzesPage from "./pages/protected/ManageQuizzesPage.jsx";
 import ManageCategoriesPage from "./pages/protected/ManageCategoriesPage.jsx";
 import ManageQuestionsPage from "./pages/protected/ManageQuestionsPage.jsx";
+import ManageUsersPage from "./pages/protected/ManageUsersPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -42,6 +43,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="manage-quizzes" element={<ManageQuizzesPage />} />
             <Route path="manage-categories" element={<ManageCategoriesPage />} />
             <Route path="manage-questions" element={<ManageQuestionsPage />} />
+            <Route path="manage-users" element={<ManageUsersPage />} />
           </Route>
         </Routes>
       </AuthProvider>

@@ -19,6 +19,7 @@ import {
   FolderCog,
   FolderOpen,
   HelpCircle,
+  Users,
 } from "lucide-react";
 
 import {
@@ -86,6 +87,11 @@ const adminMenuItems = [
     title: "Manage Questions",
     icon: HelpCircle,
     link: "/dashboard/manage-questions",
+  },
+  {
+    title: "Manage Users",
+    icon: Users,
+    link: "/dashboard/manage-users",
   },
 ];
 

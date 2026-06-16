@@ -167,3 +167,45 @@ export const updateUserStatus = async (req, resp) => {
     });
   }
 };
+
+// ADMIN: Update user details (name/email) by admin
+export const updateUserByAdmin = async (req, resp) => {
+  try {
+    const { userId } = req.params;
+    const { name, email } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return resp.status(404).json({ message: "User not found" });
+    }
+
+    if (email && email !== user.email) {
+      const emailExists = await User.findOne({ email });
+      if (emailExists) {
+        return resp.status(409).json({ message: "Email is already in use by another account" });
+      }
+      user.email = email;
+    }
+
+    if (name) user.name = name;
+
+    await user.save();
+
+    const updatedUser = await User.findById(userId).populate("role");
+
+    return resp.status(200).json({
+      status: "success",
+      message: "User details updated successfully",
+      data: {
+        user: updatedUser,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return resp.status(500).json({
+      message: "Something went wrong",
+      error: error.message,
+    });
+  }
+};
+
