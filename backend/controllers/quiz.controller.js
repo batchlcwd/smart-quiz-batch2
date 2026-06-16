@@ -2,6 +2,7 @@ import Quiz from "../models/quiz.model.js";
 import Question from "../models/question.model.js";
 import QuizAttempt from "../models/quizattempt.model.js";
 import Bookmark from "../models/bookmark.model.js";
+import Category from "../models/category.model.js";
 
 // create quiz (Admin only)
 export const createQuiz = async (req, resp) => {

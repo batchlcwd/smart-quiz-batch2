@@ -15,6 +15,12 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import DashboardHome from "./pages/protected/DashboardHome.jsx";
 import NewFeedPage from "./pages/protected/NewFeedPage.jsx";
 import SettingsPage from "./pages/protected/SettingsPage.jsx";
+import AddQuizPage from "./pages/protected/AddQuizPage.jsx";
+import GenerateQuizPage from "./pages/protected/GenerateQuizPage.jsx";
+import ManageQuizzesPage from "./pages/protected/ManageQuizzesPage.jsx";
+import ManageCategoriesPage from "./pages/protected/ManageCategoriesPage.jsx";
+import ManageQuestionsPage from "./pages/protected/ManageQuestionsPage.jsx";
+
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -31,6 +37,11 @@ createRoot(document.getElementById("root")).render(
             <Route index element={<DashboardHome />} />
             <Route path="newfeed" element={<NewFeedPage />} />
             <Route path="settings" element={<SettingsPage />} />
+            <Route path="add-quiz" element={<AddQuizPage />} />
+            <Route path="generate-quiz" element={<GenerateQuizPage />} />
+            <Route path="manage-quizzes" element={<ManageQuizzesPage />} />
+            <Route path="manage-categories" element={<ManageCategoriesPage />} />
+            <Route path="manage-questions" element={<ManageQuestionsPage />} />
           </Route>
         </Routes>
       </AuthProvider>

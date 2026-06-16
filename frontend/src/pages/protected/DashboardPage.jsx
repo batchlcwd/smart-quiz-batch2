@@ -16,6 +16,9 @@ import {
   Moon,
   ShieldCheck,
   User as UserIcon,
+  FolderCog,
+  FolderOpen,
+  HelpCircle,
 } from "lucide-react";
 
 import {
@@ -62,12 +65,27 @@ const adminMenuItems = [
   {
     title: "Add Quiz",
     icon: ArrowDownToDot,
-    link: "/",
+    link: "/dashboard/add-quiz",
   },
   {
     title: "Generate Quiz",
     icon: BrainCircuit,
-    link: "/dashboard",
+    link: "/dashboard/generate-quiz",
+  },
+  {
+    title: "Manage Quizzes",
+    icon: FolderOpen,
+    link: "/dashboard/manage-quizzes",
+  },
+  {
+    title: "Manage Categories",
+    icon: FolderCog,
+    link: "/dashboard/manage-categories",
+  },
+  {
+    title: "Manage Questions",
+    icon: HelpCircle,
+    link: "/dashboard/manage-questions",
   },
 ];
 
@@ -105,38 +123,41 @@ export default function DashboardPage() {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  const isRouteActive = (link) => {
-    if (link === "/dashboard") {
-      return location.pathname === "/dashboard" || location.pathname === "/dashboard/";
+  const isRouteActive = (link, title) => {
+    if (link === "/") {
+      return location.pathname === "/";
     }
-    return location.pathname.startsWith(link);
+    if (link === "/dashboard") {
+      return title === "Dashboard" && (location.pathname === "/dashboard" || location.pathname === "/dashboard/");
+    }
+    return location.pathname === link || location.pathname.startsWith(link + "/");
   };
 
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full bg-muted/20 dark:bg-background">
         {/* Left Sidebar */}
-        <Sidebar className="border-r border-border bg-card">
+        <Sidebar className="border-r border-border/80 bg-card/90 backdrop-blur-xs">
           <SidebarContent className="flex flex-col justify-between h-full py-4">
             
             <div className="space-y-6">
               {/* Brand Header */}
               <div className="px-6 flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-indigo-500 text-white shadow-md shadow-indigo-500/25">
+                <div className="p-2 rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-600/20">
                   <BrainCog size={22} className="animate-pulse" />
                 </div>
                 <div>
                   <h1 className="text-lg font-bold tracking-tight text-foreground">Quizify</h1>
-                  <span className="text-[10px] font-medium text-indigo-500 uppercase tracking-widest block">Dashboard</span>
+                  <span className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest block">Dashboard</span>
                 </div>
               </div>
 
-              <Separator className="bg-border/60" />
+              <Separator className="bg-border/40" />
 
               {/* User Profile Info Card */}
               <div className="px-4">
-                <div className="p-3.5 rounded-xl border border-border/80 bg-muted/40 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-indigo-500 to-violet-600 flex items-center justify-center text-white text-sm font-bold shadow-inner">
+                <div className="p-3 rounded-xl border border-border/50 bg-muted/20 flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-indigo-500 to-violet-600 flex items-center justify-center text-white text-xs font-bold shadow-inner">
                     {getInitials(user.name)}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -163,18 +184,18 @@ export default function DashboardPage() {
                 <SidebarGroupContent>
                   <SidebarMenu className="gap-1">
                     {menuItems.map((item) => {
-                      const active = isRouteActive(item.link);
+                      const active = isRouteActive(item.link, item.title);
                       return (
                         <SidebarMenuItem key={item.title}>
                           <SidebarMenuButton
                             onClick={() => navigate(item.link)}
                             className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
                               active
-                                ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/15 hover:bg-indigo-600 hover:text-white"
-                                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                                ? "bg-indigo-50/70 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 font-semibold border-l-2 border-indigo-600 dark:border-indigo-400 rounded-l-none pl-[10px]"
+                                : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                             }`}
                           >
-                            <item.icon size={16} />
+                            <item.icon size={16} className={active ? "text-indigo-600 dark:text-indigo-400" : "text-muted-foreground"} />
                             <span>{item.title}</span>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
@@ -183,24 +204,24 @@ export default function DashboardPage() {
 
                     {user.role?.name === "admin" && (
                       <>
-                        <Separator className="my-2 bg-border/60" />
+                        <Separator className="my-2 bg-border/40" />
                         <SidebarGroupLabel className="px-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60 mb-2 block">
                           Admin Controls
                         </SidebarGroupLabel>
                         
                         {adminMenuItems.map((item) => {
-                          const active = isRouteActive(item.link);
+                          const active = isRouteActive(item.link, item.title);
                           return (
                             <SidebarMenuItem key={item.title}>
                               <SidebarMenuButton
                                 onClick={() => navigate(item.link)}
                                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
                                   active
-                                    ? "bg-violet-600 text-white shadow-md shadow-violet-600/15 hover:bg-violet-600 hover:text-white"
-                                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                                    ? "bg-violet-50/70 dark:bg-violet-950/30 text-violet-600 dark:text-violet-400 font-semibold border-l-2 border-violet-600 dark:border-violet-400 rounded-l-none pl-[10px]"
+                                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                                 }`}
                               >
-                                <item.icon size={16} />
+                                <item.icon size={16} className={active ? "text-violet-600 dark:text-violet-400" : "text-muted-foreground"} />
                                 <span>{item.title}</span>
                               </SidebarMenuButton>
                             </SidebarMenuItem>
