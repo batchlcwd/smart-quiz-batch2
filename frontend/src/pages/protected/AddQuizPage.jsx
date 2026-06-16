@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,7 +24,7 @@ import {
   getCategories,
   createQuiz,
   createQuestion,
-  bulkUploadQuestions
+  bulkUploadQuestions,
 } from "../../services/quiz.service";
 import {
   FileText,
@@ -34,13 +41,15 @@ import {
   FileJson,
   PenTool,
   HelpCircle,
-  Sparkles
+  Sparkles,
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 
 export default function AddQuizPage() {
   const navigate = useNavigate();
+
   const [categories, setCategories] = useState([]);
+
   const [isLoadingCategories, setIsLoadingCategories] = useState(false);
   const [isSubmittingQuiz, setIsSubmittingQuiz] = useState(false);
 
@@ -82,7 +91,10 @@ export default function AddQuizPage() {
         if (res && res.data) {
           setCategories(res.data);
           if (res.data.length > 0) {
-            setQuizDetails(prev => ({ ...prev, categoryId: res.data[0]._id }));
+            setQuizDetails((prev) => ({
+              ...prev,
+              categoryId: res.data[0]._id,
+            }));
           }
         }
       } catch (err) {
@@ -115,9 +127,12 @@ export default function AddQuizPage() {
     setIsSubmittingQuiz(true);
     try {
       const tagsArray = quizDetails.tags
-        ? quizDetails.tags.split(",").map(t => t.trim()).filter(Boolean)
+        ? quizDetails.tags
+            .split(",")
+            .map((t) => t.trim())
+            .filter(Boolean)
         : [];
-      
+
       const payload = {
         title: quizDetails.title,
         description: quizDetails.description,
@@ -147,11 +162,11 @@ export default function AddQuizPage() {
   const handleOptionChange = (index, value) => {
     const newOptions = [...manualQuestion.options];
     newOptions[index] = value;
-    setManualQuestion(prev => ({ ...prev, options: newOptions }));
+    setManualQuestion((prev) => ({ ...prev, options: newOptions }));
   };
 
   const addOptionField = () => {
-    setManualQuestion(prev => ({ ...prev, options: [...prev.options, ""] }));
+    setManualQuestion((prev) => ({ ...prev, options: [...prev.options, ""] }));
   };
 
   const removeOptionField = (index) => {
@@ -159,14 +174,15 @@ export default function AddQuizPage() {
       return toast.error("A question must have at least 2 options");
     }
     const newOptions = manualQuestion.options.filter((_, idx) => idx !== index);
-    const newCorrectIndex = manualQuestion.correctAnswerIndex >= newOptions.length 
-      ? 0 
-      : manualQuestion.correctAnswerIndex;
-    
-    setManualQuestion(prev => ({
+    const newCorrectIndex =
+      manualQuestion.correctAnswerIndex >= newOptions.length
+        ? 0
+        : manualQuestion.correctAnswerIndex;
+
+    setManualQuestion((prev) => ({
       ...prev,
       options: newOptions,
-      correctAnswerIndex: newCorrectIndex
+      correctAnswerIndex: newCorrectIndex,
     }));
   };
 
@@ -175,7 +191,9 @@ export default function AddQuizPage() {
     if (!manualQuestion.text.trim()) {
       return toast.error("Question text is required");
     }
-    const filledOptions = manualQuestion.options.map(o => o.trim()).filter(Boolean);
+    const filledOptions = manualQuestion.options
+      .map((o) => o.trim())
+      .filter(Boolean);
     if (filledOptions.length < 2) {
       return toast.error("At least 2 options are required");
     }
@@ -193,7 +211,7 @@ export default function AddQuizPage() {
       const res = await createQuestion(payload);
       if (res && res.status === "success") {
         toast.success("Question added successfully!");
-        setAddedQuestions(prev => [...prev, res.data.question]);
+        setAddedQuestions((prev) => [...prev, res.data.question]);
         // Reset question form but keep option fields count
         setManualQuestion({
           text: "",
@@ -219,10 +237,11 @@ export default function AddQuizPage() {
           "To manage local state inside a functional component",
           "To fetch data from external APIs",
           "To manage global application routes",
-          "To directly manipulate the DOM"
+          "To directly manipulate the DOM",
         ],
         correctAnswer: [0],
-        explanation: "useState is a Hook that lets you add React state to function components."
+        explanation:
+          "useState is a Hook that lets you add React state to function components.",
       },
       {
         text: "Which of the following is correct about props in React?",
@@ -230,11 +249,12 @@ export default function AddQuizPage() {
           "Props are mutable and can be changed within the component",
           "Props are read-only and immutable",
           "Props are used to store local component variables",
-          "Props are only used in class components"
+          "Props are only used in class components",
         ],
         correctAnswer: [1],
-        explanation: "Props are read-only parameters passed into React components."
-      }
+        explanation:
+          "Props are read-only parameters passed into React components.",
+      },
     ];
     setBulkJson(JSON.stringify(template, null, 2));
   };
@@ -260,12 +280,14 @@ export default function AddQuizPage() {
       const res = await bulkUploadQuestions(createdQuiz._id, parsedQuestions);
       if (res && res.status === "success") {
         toast.success(`Successfully uploaded ${res.results} questions!`);
-        setAddedQuestions(prev => [...prev, ...res.data.questions]);
+        setAddedQuestions((prev) => [...prev, ...res.data.questions]);
         setBulkJson("");
       }
     } catch (err) {
       console.error(err);
-      toast.error(err.response?.data?.message || "Failed to bulk upload questions");
+      toast.error(
+        err.response?.data?.message || "Failed to bulk upload questions",
+      );
     } finally {
       setIsUploadingBulk(false);
     }
@@ -275,9 +297,12 @@ export default function AddQuizPage() {
     <div className="max-w-4xl mx-auto space-y-8 animate-fadeIn">
       {/* Title */}
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Manual Quiz Builder</h1>
+        <h1 className="text-2xl font-bold tracking-tight">
+          Manual Quiz Builder
+        </h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Create premium quizzes manually by entering quiz metadata and adding tailored questions.
+          Create premium quizzes manually by entering quiz metadata and adding
+          tailored questions.
         </p>
       </div>
 
@@ -289,19 +314,26 @@ export default function AddQuizPage() {
           <div className="md:col-span-1 space-y-2">
             <h3 className="text-sm font-semibold">Quiz Details</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Define the name, description, duration, categories, and difficulty levels for the new quiz.
+              Define the name, description, duration, categories, and difficulty
+              levels for the new quiz.
             </p>
           </div>
 
           <Card className="md:col-span-2 border border-border/80 bg-card/40 backdrop-blur-md">
             <form onSubmit={handleQuizSubmit}>
               <CardHeader>
-                <CardTitle className="text-base font-semibold">Metadata Setup</CardTitle>
-                <CardDescription className="text-xs">Setup parameters that identify the quiz topic and category.</CardDescription>
+                <CardTitle className="text-base font-semibold">
+                  Metadata Setup
+                </CardTitle>
+                <CardDescription className="text-xs">
+                  Setup parameters that identify the quiz topic and category.
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="title" className="text-xs font-semibold">Quiz Title</Label>
+                  <Label htmlFor="title" className="text-xs font-semibold">
+                    Quiz Title
+                  </Label>
                   <Input
                     id="title"
                     name="title"
@@ -313,7 +345,12 @@ export default function AddQuizPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="description" className="text-xs font-semibold">Description</Label>
+                  <Label
+                    htmlFor="description"
+                    className="text-xs font-semibold"
+                  >
+                    Description
+                  </Label>
                   <textarea
                     id="description"
                     name="description"
@@ -327,20 +364,37 @@ export default function AddQuizPage() {
 
                 <div className="grid gap-4 sm:grid-cols-3">
                   <div className="space-y-2">
-                    <Label htmlFor="categoryId" className="text-xs font-semibold">Category</Label>
+                    <Label
+                      htmlFor="categoryId"
+                      className="text-xs font-semibold"
+                    >
+                      Category
+                    </Label>
                     <Select
                       value={quizDetails.categoryId}
-                      onValueChange={(val) => setQuizDetails(prev => ({ ...prev, categoryId: val }))}
+                      onValueChange={(val) =>
+                        setQuizDetails((prev) => ({ ...prev, categoryId: val }))
+                      }
                     >
                       <SelectTrigger className="w-full h-8 bg-card dark:bg-input/20">
-                        <SelectValue placeholder={isLoadingCategories ? "Loading..." : "Select Category"} />
+                        <SelectValue
+                          placeholder={
+                            isLoadingCategories
+                              ? "Loading..."
+                              : "Select Category"
+                          }
+                        />
                       </SelectTrigger>
                       <SelectContent>
                         {categories.length === 0 ? (
-                          <SelectItem value="none" disabled>No categories</SelectItem>
+                          <SelectItem value="none" disabled>
+                            No categories
+                          </SelectItem>
                         ) : (
-                          categories.map(c => (
-                            <SelectItem key={c._id} value={c._id}>{c.name}</SelectItem>
+                          categories.map((c) => (
+                            <SelectItem key={c._id} value={c._id}>
+                              {c.name}
+                            </SelectItem>
                           ))
                         )}
                       </SelectContent>
@@ -348,10 +402,17 @@ export default function AddQuizPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="difficulty" className="text-xs font-semibold">Difficulty</Label>
+                    <Label
+                      htmlFor="difficulty"
+                      className="text-xs font-semibold"
+                    >
+                      Difficulty
+                    </Label>
                     <Select
                       value={quizDetails.difficulty}
-                      onValueChange={(val) => setQuizDetails(prev => ({ ...prev, difficulty: val }))}
+                      onValueChange={(val) =>
+                        setQuizDetails((prev) => ({ ...prev, difficulty: val }))
+                      }
                     >
                       <SelectTrigger className="w-full h-8 bg-card dark:bg-input/20">
                         <SelectValue placeholder="Select Difficulty" />
@@ -365,8 +426,12 @@ export default function AddQuizPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="timer" className="text-xs font-semibold flex items-center gap-1">
-                      <Clock size={12} className="text-muted-foreground" /> Time Limit (mins)
+                    <Label
+                      htmlFor="timer"
+                      className="text-xs font-semibold flex items-center gap-1"
+                    >
+                      <Clock size={12} className="text-muted-foreground" /> Time
+                      Limit (mins)
                     </Label>
                     <Input
                       id="timer"
@@ -381,8 +446,12 @@ export default function AddQuizPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="tags" className="text-xs font-semibold flex items-center gap-1">
-                    <Tag size={12} className="text-muted-foreground" /> Tags (comma-separated)
+                  <Label
+                    htmlFor="tags"
+                    className="text-xs font-semibold flex items-center gap-1"
+                  >
+                    <Tag size={12} className="text-muted-foreground" /> Tags
+                    (comma-separated)
                   </Label>
                   <Input
                     id="tags"
@@ -402,17 +471,30 @@ export default function AddQuizPage() {
                     checked={quizDetails.isPublished}
                     onChange={handleQuizChange}
                   />
-                  <Label htmlFor="isPublished" className="text-xs font-semibold cursor-pointer select-none">
+                  <Label
+                    htmlFor="isPublished"
+                    className="text-xs font-semibold cursor-pointer select-none"
+                  >
                     Publish immediately (visible to students)
                   </Label>
                 </div>
               </CardContent>
               <CardFooter className="flex justify-between items-center border-t border-border/40 bg-muted/20 px-6 py-4 rounded-b-lg">
-                <Button variant="ghost" type="button" onClick={() => navigate("/dashboard")} className="text-xs">
+                <Button
+                  variant="ghost"
+                  type="button"
+                  onClick={() => navigate("/dashboard")}
+                  className="text-xs"
+                >
                   Cancel
                 </Button>
-                <Button type="submit" disabled={isSubmittingQuiz} className="text-xs bg-indigo-600 hover:bg-indigo-700 text-white gap-2 cursor-pointer shadow-md shadow-indigo-600/10">
-                  {isSubmittingQuiz ? "Creating..." : "Next: Add Questions"} <ArrowRight size={14} />
+                <Button
+                  type="submit"
+                  disabled={isSubmittingQuiz}
+                  className="text-xs bg-indigo-600 hover:bg-indigo-700 text-white gap-2 cursor-pointer shadow-md shadow-indigo-600/10"
+                >
+                  {isSubmittingQuiz ? "Creating..." : "Next: Add Questions"}{" "}
+                  <ArrowRight size={14} />
                 </Button>
               </CardFooter>
             </form>
@@ -428,9 +510,14 @@ export default function AddQuizPage() {
                 <BookOpen size={20} />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-foreground">{createdQuiz.title}</h3>
+                <h3 className="text-sm font-bold text-foreground">
+                  {createdQuiz.title}
+                </h3>
                 <div className="flex items-center gap-2 mt-1">
-                  <Badge variant="secondary" className="capitalize text-[10px] font-semibold py-0">
+                  <Badge
+                    variant="secondary"
+                    className="capitalize text-[10px] font-semibold py-0"
+                  >
                     {createdQuiz.difficulty}
                   </Badge>
                   <span className="text-[10px] text-muted-foreground">
@@ -462,7 +549,9 @@ export default function AddQuizPage() {
             {/* Left sidebar: list of added questions */}
             <div className="md:col-span-1 space-y-4">
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Added Questions</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  Added Questions
+                </h4>
                 <Badge variant="outline" className="text-[9px] font-bold">
                   {addedQuestions.length} total
                 </Badge>
@@ -470,18 +559,32 @@ export default function AddQuizPage() {
 
               {addedQuestions.length === 0 ? (
                 <div className="p-6 text-center rounded-2xl border border-dashed border-border/80 bg-muted/10 text-muted-foreground">
-                  <HelpCircle size={32} className="mx-auto mb-2 opacity-40 text-indigo-500" />
+                  <HelpCircle
+                    size={32}
+                    className="mx-auto mb-2 opacity-40 text-indigo-500"
+                  />
                   <p className="text-xs font-medium">No questions yet</p>
-                  <p className="text-[10px] text-muted-foreground/80 mt-0.5">Use manual or bulk upload to start</p>
+                  <p className="text-[10px] text-muted-foreground/80 mt-0.5">
+                    Use manual or bulk upload to start
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-2 max-h-[380px] overflow-y-auto no-scrollbar pr-1">
                   {addedQuestions.map((q, idx) => (
-                    <div key={q._id || idx} className="p-3 rounded-xl border border-border bg-card/60 hover:bg-card transition-colors flex gap-2.5 items-start">
-                      <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 min-w-[15px]">{idx + 1}.</span>
+                    <div
+                      key={q._id || idx}
+                      className="p-3 rounded-xl border border-border bg-card/60 hover:bg-card transition-colors flex gap-2.5 items-start"
+                    >
+                      <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 min-w-[15px]">
+                        {idx + 1}.
+                      </span>
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs font-semibold text-foreground line-clamp-2 leading-relaxed">{q.text}</p>
-                        <p className="text-[10px] text-muted-foreground mt-1 font-medium">{q.options?.length || 0} choices</p>
+                        <p className="text-xs font-semibold text-foreground line-clamp-2 leading-relaxed">
+                          {q.text}
+                        </p>
+                        <p className="text-[10px] text-muted-foreground mt-1 font-medium">
+                          {q.options?.length || 0} choices
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -524,24 +627,41 @@ export default function AddQuizPage() {
                 <Card className="border border-border/80 bg-card/40 backdrop-blur-md">
                   <form onSubmit={handleManualQuestionSubmit}>
                     <CardHeader>
-                      <CardTitle className="text-base font-semibold">New Question Setup</CardTitle>
-                      <CardDescription className="text-xs">Add an individual question with custom options and explanation.</CardDescription>
+                      <CardTitle className="text-base font-semibold">
+                        New Question Setup
+                      </CardTitle>
+                      <CardDescription className="text-xs">
+                        Add an individual question with custom options and
+                        explanation.
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="questionText" className="text-xs font-semibold">Question Text</Label>
+                        <Label
+                          htmlFor="questionText"
+                          className="text-xs font-semibold"
+                        >
+                          Question Text
+                        </Label>
                         <Input
                           id="questionText"
                           placeholder="e.g. Which keyword is used to declare block-scoped variables in JS?"
                           value={manualQuestion.text}
-                          onChange={(e) => setManualQuestion(prev => ({ ...prev, text: e.target.value }))}
+                          onChange={(e) =>
+                            setManualQuestion((prev) => ({
+                              ...prev,
+                              text: e.target.value,
+                            }))
+                          }
                           required
                         />
                       </div>
 
                       <div className="space-y-2">
                         <div className="flex justify-between items-center">
-                          <Label className="text-xs font-semibold">Options & Answers</Label>
+                          <Label className="text-xs font-semibold">
+                            Options & Answers
+                          </Label>
                           <Button
                             type="button"
                             variant="ghost"
@@ -557,11 +677,15 @@ export default function AddQuizPage() {
                           {manualQuestion.options.map((option, idx) => (
                             <div key={idx} className="flex gap-2 items-center">
                               <div className="flex items-center gap-1.5 flex-1">
-                                <span className="text-[10px] font-bold text-muted-foreground w-4">{String.fromCharCode(65 + idx)})</span>
+                                <span className="text-[10px] font-bold text-muted-foreground w-4">
+                                  {String.fromCharCode(65 + idx)})
+                                </span>
                                 <Input
                                   placeholder={`Option ${String.fromCharCode(65 + idx)}`}
                                   value={option}
-                                  onChange={(e) => handleOptionChange(idx, e.target.value)}
+                                  onChange={(e) =>
+                                    handleOptionChange(idx, e.target.value)
+                                  }
                                   required
                                 />
                               </div>
@@ -580,10 +704,20 @@ export default function AddQuizPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="correctAnswerIndex" className="text-xs font-semibold">Correct Option</Label>
+                        <Label
+                          htmlFor="correctAnswerIndex"
+                          className="text-xs font-semibold"
+                        >
+                          Correct Option
+                        </Label>
                         <Select
                           value={String(manualQuestion.correctAnswerIndex)}
-                          onValueChange={(val) => setManualQuestion(prev => ({ ...prev, correctAnswerIndex: Number(val) }))}
+                          onValueChange={(val) =>
+                            setManualQuestion((prev) => ({
+                              ...prev,
+                              correctAnswerIndex: Number(val),
+                            }))
+                          }
                         >
                           <SelectTrigger className="w-full h-8 bg-card dark:bg-input/20">
                             <SelectValue placeholder="Select Correct Option" />
@@ -599,20 +733,35 @@ export default function AddQuizPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="explanation" className="text-xs font-semibold">Explanation (Optional)</Label>
+                        <Label
+                          htmlFor="explanation"
+                          className="text-xs font-semibold"
+                        >
+                          Explanation (Optional)
+                        </Label>
                         <textarea
                           id="explanation"
                           rows={2}
                           placeholder="Provide the reasoning behind the correct option..."
                           className="w-full min-h-[50px] rounded-lg border border-input bg-transparent px-3 py-2 text-sm transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 placeholder:text-muted-foreground/60 dark:bg-input/20"
                           value={manualQuestion.explanation}
-                          onChange={(e) => setManualQuestion(prev => ({ ...prev, explanation: e.target.value }))}
+                          onChange={(e) =>
+                            setManualQuestion((prev) => ({
+                              ...prev,
+                              explanation: e.target.value,
+                            }))
+                          }
                         />
                       </div>
                     </CardContent>
                     <CardFooter className="flex justify-end border-t border-border/40 bg-muted/20 px-6 py-4 rounded-b-lg">
-                      <Button type="submit" disabled={isAddingQuestion} className="text-xs bg-indigo-600 hover:bg-indigo-700 text-white gap-2 cursor-pointer shadow-md shadow-indigo-600/10">
-                        {isAddingQuestion ? "Saving..." : "Save Question"} <Plus size={14} />
+                      <Button
+                        type="submit"
+                        disabled={isAddingQuestion}
+                        className="text-xs bg-indigo-600 hover:bg-indigo-700 text-white gap-2 cursor-pointer shadow-md shadow-indigo-600/10"
+                      >
+                        {isAddingQuestion ? "Saving..." : "Save Question"}{" "}
+                        <Plus size={14} />
                       </Button>
                     </CardFooter>
                   </form>
@@ -624,8 +773,13 @@ export default function AddQuizPage() {
                     <CardHeader>
                       <div className="flex justify-between items-center">
                         <div>
-                          <CardTitle className="text-base font-semibold">Bulk Upload Questions</CardTitle>
-                          <CardDescription className="text-xs">Upload multiple questions at once using a formatted JSON array.</CardDescription>
+                          <CardTitle className="text-base font-semibold">
+                            Bulk Upload Questions
+                          </CardTitle>
+                          <CardDescription className="text-xs">
+                            Upload multiple questions at once using a formatted
+                            JSON array.
+                          </CardDescription>
                         </div>
                         <Button
                           type="button"
@@ -634,13 +788,22 @@ export default function AddQuizPage() {
                           className="text-[10px] font-semibold h-7 gap-1 cursor-pointer"
                           onClick={loadJsonTemplate}
                         >
-                          <Sparkles size={11} className="text-indigo-500 animate-pulse" /> Load Template
+                          <Sparkles
+                            size={11}
+                            className="text-indigo-500 animate-pulse"
+                          />{" "}
+                          Load Template
                         </Button>
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="bulkJson" className="text-xs font-semibold">JSON Payload</Label>
+                        <Label
+                          htmlFor="bulkJson"
+                          className="text-xs font-semibold"
+                        >
+                          JSON Payload
+                        </Label>
                         <textarea
                           id="bulkJson"
                           rows={12}
@@ -653,8 +816,15 @@ export default function AddQuizPage() {
                       </div>
                     </CardContent>
                     <CardFooter className="flex justify-end border-t border-border/40 bg-muted/20 px-6 py-4 rounded-b-lg">
-                      <Button type="submit" disabled={isUploadingBulk} className="text-xs bg-indigo-600 hover:bg-indigo-700 text-white gap-2 cursor-pointer shadow-md shadow-indigo-600/10">
-                        {isUploadingBulk ? "Uploading..." : "Upload & Parse JSON"} <CheckCircle2 size={14} />
+                      <Button
+                        type="submit"
+                        disabled={isUploadingBulk}
+                        className="text-xs bg-indigo-600 hover:bg-indigo-700 text-white gap-2 cursor-pointer shadow-md shadow-indigo-600/10"
+                      >
+                        {isUploadingBulk
+                          ? "Uploading..."
+                          : "Upload & Parse JSON"}{" "}
+                        <CheckCircle2 size={14} />
                       </Button>
                     </CardFooter>
                   </form>
