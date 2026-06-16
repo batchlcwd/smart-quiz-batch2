@@ -1,0 +1,881 @@
+{
+  "info": {
+    "_postman_id": "144f36a3-7110-48c3-9441-b38c5f9b9f8c",
+    "name": "MERN2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47874335"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"durgesh@gmail.com\",\r\n    \"password\":\"durgesh\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/auth/login",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change role",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMWQ3OTRiYTBiYjRiMDIxMWE2OGJhMCIsImlhdCI6MTc4MDMxOTk4OCwiZXhwIjoxNzgwNDA2Mzg4fQ.i_3cjPWnN8Sw3hl_UbU7FpCbKdUh5N8NWcIoK2w7VHU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\":\"6a1d794ba0bb4b0211a68ba0\",\r\n    \"role\":\"guest\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/auth/change-user-role",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "change-user-role"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMWFkZGIyZjUxOGE0N2JiYjYxMzAzYiIsImlhdCI6MTc4MDQwMDg2OCwiZXhwIjoxNzgwNDg3MjY4fQ.LHvPiLYqdEZRRTUVvHQxRXvm2IiAJRPj2RB5FzozsHE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMWFkZGIyZjUxOGE0N2JiYjYxMzAzYiIsImlhdCI6MTc4MDMxODk1OSwiZXhwIjoxNzgwNDA1MzU5fQ.1XE2zG_hR-tc21g9IV51fy57VsTMHkAQ2p1yYZksc9I",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"roshni@gmail.com\",\r\n    \"password\":\"roshni\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/auth/delete",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "signup",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"roshni tiwari\",\r\n    \"email\":\"roshnitiwari@gmail.com\",\r\n    \"password\":\"abc\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/auth/register",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "list user",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "7412",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "localhost:8181/api/users",
+              "host": [
+                "localhost"
+              ],
+              "port": "8181",
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "74122352",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n        \"userId\": \"21525215\",\r\n        \"name\": \"Harsh TIWARI\",\r\n        \"email\": \"harsh@dev.in\",\r\n        \"password\": \"abc@123\",\r\n        \"about\": \"I am professional javabackend developer\",\r\n        \"age\": 20\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8181/api/users",
+              "host": [
+                "localhost"
+              ],
+              "port": "8181",
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "74122352",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n      \r\n        \"name\": \"Durgesh Tiwari\",\r\n        \"email\": \"durgesh@dev.in\",\r\n        \"password\": \"abc@123\"\r\n      \r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8181/api/signup",
+              "host": [
+                "localhost"
+              ],
+              "port": "8181",
+              "path": [
+                "api",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "74122352",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n      \r\n        \r\n        \"email\": \"harsh@gmail.com\",\r\n        \"password\": \"abc1234\"\r\n      \r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8181/api/login",
+              "host": [
+                "localhost"
+              ],
+              "port": "8181",
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "quizzes",
+      "item": [
+        {
+          "name": "list  quizzes",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMWFkZGIyZjUxOGE0N2JiYjYxMzAzYiIsImlhdCI6MTc4MDkyMTIzMywiZXhwIjoxNzgxMDA3NjMzfQ.vT0gcOidn0gH7TVp-Z-WfC1PyD21D0VtZkaMBIQ_EwI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcnNoQGRldi5pbiIsInN1YiI6IjY4ZjIzNjRiOThjNGNlMzBhYWMwMTU3MiIsInRva2VuX3R5cGUiOiJhY2Nlc3NfdG9rZW4iLCJpYXQiOjE3NjI0MTA4MjEsImV4cCI6MTc2MjQ5NzIyMX0.Um_x-Ji1vwtugGTwK5iarC8fd5C0rjyVjTrjTnZaJpk",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/quizzes",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "quizzes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "questions of quiz",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMWFkZGIyZjUxOGE0N2JiYjYxMzAzYiIsImlhdCI6MTc4MDkyMTIzMywiZXhwIjoxNzgxMDA3NjMzfQ.vT0gcOidn0gH7TVp-Z-WfC1PyD21D0VtZkaMBIQ_EwI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcnNoQGRldi5pbiIsInN1YiI6IjY4ZjIzNjRiOThjNGNlMzBhYWMwMTU3MiIsInRva2VuX3R5cGUiOiJhY2Nlc3NfdG9rZW4iLCJpYXQiOjE3NjI0MTA4MjEsImV4cCI6MTc2MjQ5NzIyMX0.Um_x-Ji1vwtugGTwK5iarC8fd5C0rjyVjTrjTnZaJpk",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/quizzes/6a26b3f4304d4cf6fe4026f5/questions",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "quizzes",
+                "6a26b3f4304d4cf6fe4026f5",
+                "questions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcnNoQGdtYWlsLmNvbSIsInN1YiI6IjY5MTQyZmYwZDNlYTZiYTIzZTY5MjE2MCIsInRva2VuX3R5cGUiOiJhY2Nlc3NfdG9rZW4iLCJpYXQiOjE3NjMxOTYyNTcsImV4cCI6MTc2MzI4MjY1N30.wxb1fzO7MZZFaqGY97JSlpyPm8XYrSk6bVb3vSqVnyQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n       \r\n        \"title\": \"AI ML QUiz\",\r\n        \"description\": \"This is spring boot  quiz for learners who is intreseted in AI\",\r\n        \"maxMarks\":100,\r\n        \"minusMarking\":false,       \r\n        \"maxTime\":30,\r\n        \"questions\":[\"68ee407648fe11b00c147acf\",\"68ee401248fe11b00c147acd\"],\r\n        \"instructions\":\"Test instructions\"\r\n\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8181/api/quizzes",
+              "host": [
+                "localhost"
+              ],
+              "port": "8181",
+              "path": [
+                "api",
+                "quizzes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "generate quiz ai",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMWFkZGIyZjUxOGE0N2JiYjYxMzAzYiIsImlhdCI6MTc4MDkyMTIzMywiZXhwIjoxNzgxMDA3NjMzfQ.vT0gcOidn0gH7TVp-Z-WfC1PyD21D0VtZkaMBIQ_EwI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "7412",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"topic\":\"Javascript basics\",\r\n    \"difficulty\":\"easy\",\r\n    \"numQuestions\":10,\r\n    \"categoryId\":\"6a1eca07827c6ab26af0d6f5\"\r\n\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/ai/generate",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "ai",
+                "generate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get single",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcnNoQGRldi5pbiIsInN1YiI6IjY4ZjIzNjRiOThjNGNlMzBhYWMwMTU3MiIsInRva2VuX3R5cGUiOiJhY2Nlc3NfdG9rZW4iLCJpYXQiOjE3NjI0MTA4MjEsImV4cCI6MTc2MjQ5NzIyMX0.Um_x-Ji1vwtugGTwK5iarC8fd5C0rjyVjTrjTnZaJpk",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n        \"quizId\": \"45125963\",\r\n        \"title\": \"Generative AI quiz\",\r\n        \"description\": \"This is generative ai quiz for learners who is intreseted in AI\"\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8181/api/quizzes/68ef9a0bc1a53fa8e4f4d21d",
+              "host": [
+                "localhost"
+              ],
+              "port": "8181",
+              "path": [
+                "api",
+                "quizzes",
+                "68ef9a0bc1a53fa8e4f4d21d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n        \"quizId\": \"45125963\",\r\n        \"title\": \"Generative AI quiz\",\r\n        \"description\": \"This is generative ai quiz for learners who is intreseted in AI\"\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8181/api/quizzes/789764164",
+              "host": [
+                "localhost"
+              ],
+              "port": "8181",
+              "path": [
+                "api",
+                "quizzes",
+                "789764164"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "questions",
+      "item": [
+        {
+          "name": "create Copy",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "7412",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n       \r\n        \"question\": \"What is react js\",\r\n      \"option1\":\"javascript backend lib\",\r\n      \"option2\":\"python backend framework\",\r\n      \"option3\":\"ui library\",\r\n      \"option4\":\"None of above\",\r\n      \"correctAnswer\":\"javascript backend lib\"\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8181/api/questions",
+              "host": [
+                "localhost"
+              ],
+              "port": "8181",
+              "path": [
+                "api",
+                "questions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list questions",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "7412",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n       \r\n        \"question\": \"What is node js\",\r\n      \"option1\":\"javascript backend lib\",\r\n      \"option2\":\"python backend framework\",\r\n      \"option3\":\"ui library\",\r\n      \"option4\":\"None of above\",\r\n      \"correctAnswer\":\"javascript backend lib\"\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8181/api/questions",
+              "host": [
+                "localhost"
+              ],
+              "port": "8181",
+              "path": [
+                "api",
+                "questions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get single question",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "7412",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n       \r\n        \"question\": \"What is node js\",\r\n      \"option1\":\"javascript backend lib\",\r\n      \"option2\":\"python backend framework\",\r\n      \"option3\":\"ui library\",\r\n      \"option4\":\"None of above\",\r\n      \"correctAnswer\":\"javascript backend lib\"\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8181/api/questions/68ee407648fe11b00c147acf",
+              "host": [
+                "localhost"
+              ],
+              "port": "8181",
+              "path": [
+                "api",
+                "questions",
+                "68ee407648fe11b00c147acf"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "categories",
+      "item": [
+        {
+          "name": "create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMWFkZGIyZjUxOGE0N2JiYjYxMzAzYiIsImlhdCI6MTc4MDQwNDE0MCwiZXhwIjoxNzgwNDkwNTQwfQ.cLH1mDM63VOBBLwLo--gUbjbRO1ThEuAaDJrS9MN2Ng",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"wagaga\",\r\n    \"description\":\"Tasdgasdgasg\",\r\n    \"slug\":\"programiasdgsagory\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/categories",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/categories",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get single",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/categories/6a1eca29827c6ab26af0d6f6",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "6a1eca29827c6ab26af0d6f6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/categories/6a1eca29827c6ab26af0d6f6",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "6a1eca29827c6ab26af0d6f6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Java Programing Quizzes\",\r\n    \"description\": \"This is category contains java related quizzes\",\r\n    \"slug\": \"java-programing-quiz\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/v1/categories/6a1ecfc69d9b79415068692ckjhk",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "6a1ecfc69d9b79415068692ckjhk"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ask-ai",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMWFkZGIyZjUxOGE0N2JiYjYxMzAzYiIsImlhdCI6MTc4MDkxOTI3MSwiZXhwIjoxNzgxMDA1NjcxfQ.XQQljjLMNUjmjDH39Izd6Wq7vVtAlTmryEZquQYwNmg",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\r\n    \"prompt\":\"What is Java Explain in Hinglish\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:4000/api/v1/ask-ai",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "v1",
+            "ask-ai"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
