@@ -69,3 +69,11 @@ export const deleteQuestion = async (questionId) => {
   const response = await axiosClient.delete(`/questions/${questionId}`);
   return response.data;
 };
+
+
+// get all quizzes
+
+export const getAllQuizzes = async (params) => {
+  const response = await axiosClient.get('/quizzes', { params });
+  return response.data
+}
