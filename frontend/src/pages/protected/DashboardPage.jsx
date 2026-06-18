@@ -20,6 +20,7 @@ import {
   FolderOpen,
   HelpCircle,
   Users,
+  History,
 } from "lucide-react";
 
 import {
@@ -54,6 +55,11 @@ const menuItems = [
     title: "New Feed",
     icon: BookDashed,
     link: "/dashboard/newfeed",
+  },
+  {
+    title: "Quiz Attempts",
+    icon: History,
+    link: "/dashboard/attempts",
   },
   {
     title: "Settings",

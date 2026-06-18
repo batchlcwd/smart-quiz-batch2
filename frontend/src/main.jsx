@@ -15,6 +15,7 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import DashboardHome from "./pages/protected/DashboardHome.jsx";
 import NewFeedPage from "./pages/protected/NewFeedPage.jsx";
 import AttemptQuizPage from "./pages/protected/AttemptQuizPage.jsx";
+import QuizAttemptsPage from "./pages/protected/QuizAttemptsPage.jsx";
 import SettingsPage from "./pages/protected/SettingsPage.jsx";
 import AddQuizPage from "./pages/protected/AddQuizPage.jsx";
 import GenerateQuizPage from "./pages/protected/GenerateQuizPage.jsx";
@@ -39,6 +40,7 @@ createRoot(document.getElementById("root")).render(
             <Route index element={<DashboardHome />} />
             <Route path="newfeed" element={<NewFeedPage />} />
             <Route path="attempt-quiz/:quizId" element={<AttemptQuizPage />} />
+            <Route path="attempts" element={<QuizAttemptsPage />} />
             <Route path="settings" element={<SettingsPage />} />
             <Route path="add-quiz" element={<AddQuizPage />} />
             <Route path="generate-quiz" element={<GenerateQuizPage />} />

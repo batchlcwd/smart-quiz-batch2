@@ -107,3 +107,9 @@ export const getQuizById = async (quizId) => {
   const response = await axiosClient.get(`/quizzes/${quizId}`);
   return response.data;
 };
+
+// get user completed attempts history
+export const getAttemptsHistory = async () => {
+  const response = await axiosClient.get("/attempts/history");
+  return response.data;
+};
