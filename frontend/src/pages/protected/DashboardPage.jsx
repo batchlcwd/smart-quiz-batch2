@@ -21,6 +21,7 @@ import {
   HelpCircle,
   Users,
   History,
+  Bookmark,
 } from "lucide-react";
 
 import {
@@ -60,6 +61,11 @@ const menuItems = [
     title: "Quiz Attempts",
     icon: History,
     link: "/dashboard/attempts",
+  },
+  {
+    title: "Bookmarks",
+    icon: Bookmark,
+    link: "/dashboard/bookmarks",
   },
   {
     title: "Settings",
