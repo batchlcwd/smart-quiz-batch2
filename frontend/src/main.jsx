@@ -17,6 +17,7 @@ import NewFeedPage from "./pages/protected/NewFeedPage.jsx";
 import AttemptQuizPage from "./pages/protected/AttemptQuizPage.jsx";
 import QuizAttemptsPage from "./pages/protected/QuizAttemptsPage.jsx";
 import BookmarksPage from "./pages/protected/BookmarksPage.jsx";
+import LeaderboardPage from "./pages/protected/LeaderboardPage.jsx";
 import SettingsPage from "./pages/protected/SettingsPage.jsx";
 import AddQuizPage from "./pages/protected/AddQuizPage.jsx";
 import GenerateQuizPage from "./pages/protected/GenerateQuizPage.jsx";
@@ -43,6 +44,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="attempt-quiz/:quizId" element={<AttemptQuizPage />} />
             <Route path="attempts" element={<QuizAttemptsPage />} />
             <Route path="bookmarks" element={<BookmarksPage />} />
+            <Route path="leaderboard" element={<LeaderboardPage />} />
             <Route path="settings" element={<SettingsPage />} />
             <Route path="add-quiz" element={<AddQuizPage />} />
             <Route path="generate-quiz" element={<GenerateQuizPage />} />

@@ -22,6 +22,7 @@ import {
   Users,
   History,
   Bookmark,
+  Trophy,
 } from "lucide-react";
 
 import {
@@ -66,6 +67,11 @@ const menuItems = [
     title: "Bookmarks",
     icon: Bookmark,
     link: "/dashboard/bookmarks",
+  },
+  {
+    title: "Leaderboard",
+    icon: Trophy,
+    link: "/dashboard/leaderboard",
   },
   {
     title: "Settings",
