@@ -12,7 +12,13 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { getGlobalLeaderboard } from "../../services/dashboard.service";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -106,7 +112,8 @@ function LeaderboardPage() {
             Leaderboard Arena
           </h1>
           <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-            See how you stack up against the top quiz-solvers globally. Gain points by completing quizzes and scoring high!
+            See how you stack up against the top quiz-solvers globally. Gain
+            points by completing quizzes and scoring high!
           </p>
         </div>
       </div>
@@ -119,16 +126,15 @@ function LeaderboardPage() {
           </div>
           <h2 className="text-xl font-bold">No rankings recorded</h2>
           <p className="text-sm text-muted-foreground max-w-sm">
-            Be the first to complete a quiz and claim the top rank on the global leaderboard!
+            Be the first to complete a quiz and claim the top rank on the global
+            leaderboard!
           </p>
         </Card>
       ) : (
         <div className="space-y-10">
-          
           {/* TOP 3 PODIUM DISPLAY */}
           <div className="max-w-2xl mx-auto pt-8 px-4">
             <div className="grid grid-cols-3 gap-2 sm:gap-6 items-end justify-center text-center">
-              
               {/* SECOND PLACE (LEFT) */}
               <div className="flex flex-col items-center">
                 {secondPlace ? (
@@ -142,8 +148,12 @@ function LeaderboardPage() {
                       </span>
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs font-bold text-foreground truncate max-w-[90px] sm:max-w-[130px] mx-auto">{secondPlace.name}</p>
-                      <p className="text-[10px] font-extrabold text-indigo-600 dark:text-indigo-400">{secondPlace.totalScore} pts</p>
+                      <p className="text-xs font-bold text-foreground truncate max-w-[90px] sm:max-w-[130px] mx-auto">
+                        {secondPlace.name}
+                      </p>
+                      <p className="text-[10px] font-extrabold text-indigo-600 dark:text-indigo-400">
+                        {secondPlace.totalScore} pts
+                      </p>
                     </div>
                   </div>
                 ) : (
@@ -151,7 +161,9 @@ function LeaderboardPage() {
                 )}
                 {/* Podium pillar */}
                 <div className="w-full bg-slate-100 dark:bg-muted/30 border-t-2 border-slate-300 h-24 sm:h-28 rounded-t-xl flex items-center justify-center shadow-inner">
-                  <span className="text-xl sm:text-2xl font-black text-slate-400">2nd</span>
+                  <span className="text-xl sm:text-2xl font-black text-slate-400">
+                    2nd
+                  </span>
                 </div>
               </div>
 
@@ -171,8 +183,12 @@ function LeaderboardPage() {
                       </span>
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs sm:text-sm font-black text-foreground truncate max-w-[100px] sm:max-w-[140px] mx-auto">{firstPlace.name}</p>
-                      <p className="text-[10px] sm:text-xs font-black text-indigo-600 dark:text-indigo-400">{firstPlace.totalScore} pts</p>
+                      <p className="text-xs sm:text-sm font-black text-foreground truncate max-w-[100px] sm:max-w-[140px] mx-auto">
+                        {firstPlace.name}
+                      </p>
+                      <p className="text-[10px] sm:text-xs font-black text-indigo-600 dark:text-indigo-400">
+                        {firstPlace.totalScore} pts
+                      </p>
                     </div>
                   </div>
                 ) : (
@@ -181,7 +197,9 @@ function LeaderboardPage() {
                 {/* Podium pillar */}
                 <div className="w-full bg-amber-500/5 dark:bg-amber-500/10 border-t-4 border-amber-400 h-32 sm:h-36 rounded-t-2xl flex items-center justify-center shadow-md relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-transparent pointer-events-none" />
-                  <span className="text-2xl sm:text-3xl font-black text-amber-500">1st</span>
+                  <span className="text-2xl sm:text-3xl font-black text-amber-500">
+                    1st
+                  </span>
                 </div>
               </div>
 
@@ -198,8 +216,12 @@ function LeaderboardPage() {
                       </span>
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs font-bold text-foreground truncate max-w-[90px] sm:max-w-[130px] mx-auto">{thirdPlace.name}</p>
-                      <p className="text-[10px] font-extrabold text-indigo-600 dark:text-indigo-400">{thirdPlace.totalScore} pts</p>
+                      <p className="text-xs font-bold text-foreground truncate max-w-[90px] sm:max-w-[130px] mx-auto">
+                        {thirdPlace.name}
+                      </p>
+                      <p className="text-[10px] font-extrabold text-indigo-600 dark:text-indigo-400">
+                        {thirdPlace.totalScore} pts
+                      </p>
                     </div>
                   </div>
                 ) : (
@@ -207,10 +229,11 @@ function LeaderboardPage() {
                 )}
                 {/* Podium pillar */}
                 <div className="w-full bg-orange-100/60 dark:bg-muted/20 border-t-2 border-amber-600 h-18 sm:h-22 rounded-t-xl flex items-center justify-center shadow-inner">
-                  <span className="text-lg sm:text-xl font-black text-amber-700">3rd</span>
+                  <span className="text-lg sm:text-xl font-black text-amber-700">
+                    3rd
+                  </span>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -224,9 +247,10 @@ function LeaderboardPage() {
 
             <div className="space-y-2">
               {leaderboard.map((player) => {
-                const isCurrentUser = player.userId === user?._id || player.name === user?.name;
+                const isCurrentUser =
+                  player.userId === user?._id || player.name === user?.name;
                 const score = player.totalScore;
-                
+
                 return (
                   <div
                     key={player.rank}
@@ -238,12 +262,17 @@ function LeaderboardPage() {
                   >
                     <div className="flex items-center gap-4 min-w-0">
                       {/* Rank number indicator */}
-                      <span className={`flex items-center justify-center w-7 h-7 rounded-full text-xs font-extrabold shrink-0 ${
-                        player.rank === 1 ? "bg-amber-500 text-white" :
-                        player.rank === 2 ? "bg-slate-300 text-slate-800" :
-                        player.rank === 3 ? "bg-amber-700 text-white" :
-                        "bg-muted text-muted-foreground"
-                      }`}>
+                      <span
+                        className={`flex items-center justify-center w-7 h-7 rounded-full text-xs font-extrabold shrink-0 ${
+                          player.rank === 1
+                            ? "bg-amber-500 text-white"
+                            : player.rank === 2
+                              ? "bg-slate-300 text-slate-800"
+                              : player.rank === 3
+                                ? "bg-amber-700 text-white"
+                                : "bg-muted text-muted-foreground"
+                        }`}
+                      >
                         {player.rank}
                       </span>
 
@@ -255,13 +284,19 @@ function LeaderboardPage() {
                       {/* Player Info block */}
                       <div className="min-w-0">
                         <span className="text-xs sm:text-sm font-bold text-foreground truncate block">
-                          {player.name} {isCurrentUser && <span className="text-[9px] px-1 py-0.2 rounded bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-normal ml-1">You</span>}
+                          {player.name}{" "}
+                          {isCurrentUser && (
+                            <span className="text-[9px] px-1 py-0.2 rounded bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-normal ml-1">
+                              You
+                            </span>
+                          )}
                         </span>
-                        
+
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] text-muted-foreground">
                           <span className="flex items-center gap-0.5">
                             <BookOpen size={10} />
-                            {player.quizzesSolved} {player.quizzesSolved === 1 ? "quiz" : "quizzes"}
+                            {player.quizzesSolved}{" "}
+                            {player.quizzesSolved === 1 ? "quiz" : "quizzes"}
                           </span>
                           <span>•</span>
                           <span className="flex items-center gap-0.5">
@@ -278,13 +313,11 @@ function LeaderboardPage() {
                         {score} pts
                       </span>
                     </div>
-
                   </div>
                 );
               })}
             </div>
           </div>
-
         </div>
       )}
     </div>

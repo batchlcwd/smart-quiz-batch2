@@ -33,14 +33,17 @@ import {
   Trophy,
 } from "lucide-react";
 import { toast } from "react-hot-toast";
-import { getAttemptsHistory, getAttemptResult } from "../../services/quiz.service";
+import {
+  getAttemptsHistory,
+  getAttemptResult,
+} from "../../services/quiz.service";
 import Loading from "../../components/shared/Loading";
 
 function QuizAttemptsPage() {
   const navigate = useNavigate();
   const [attempts, setAttempts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   // Attempt details modal states
   const [selectedAttemptId, setSelectedAttemptId] = useState(null);
   const [attemptDetails, setAttemptDetails] = useState(null);
@@ -52,6 +55,7 @@ function QuizAttemptsPage() {
         setIsLoading(true);
         const res = await getAttemptsHistory();
         if (res?.data?.attempts) {
+          //set attempts to variable
           setAttempts(res.data.attempts);
         }
       } catch (error) {
@@ -173,7 +177,10 @@ function QuizAttemptsPage() {
         <Separator className="border-border/60" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <Card key={i} className="p-6 border border-border/80 bg-card/40 animate-pulse space-y-4">
+            <Card
+              key={i}
+              className="p-6 border border-border/80 bg-card/40 animate-pulse space-y-4"
+            >
               <div className="flex justify-between items-start">
                 <div className="h-6 w-32 bg-muted rounded" />
                 <div className="h-5 w-16 bg-muted rounded" />
@@ -207,7 +214,8 @@ function QuizAttemptsPage() {
             Quiz Attempts
           </h1>
           <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-            Review your past attempts, accuracy scores, time spent, and detailed quiz results.
+            Review your past attempts, accuracy scores, time spent, and detailed
+            quiz results.
           </p>
         </div>
       </div>
@@ -220,9 +228,13 @@ function QuizAttemptsPage() {
           </div>
           <h2 className="text-xl font-bold">No quiz attempts yet</h2>
           <p className="text-sm text-muted-foreground max-w-sm">
-            You haven't attempted any quizzes yet. Head over to the New Feed to find standard and AI-generated quizzes!
+            You haven't attempted any quizzes yet. Head over to the New Feed to
+            find standard and AI-generated quizzes!
           </p>
-          <Button onClick={() => navigate("/dashboard/newfeed")} className="mt-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold">
+          <Button
+            onClick={() => navigate("/dashboard/newfeed")}
+            className="mt-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold"
+          >
             Explore Quizzes
             <ArrowRight size={14} className="ml-1" />
           </Button>
@@ -238,10 +250,10 @@ function QuizAttemptsPage() {
               score >= 85
                 ? "text-emerald-500 bg-emerald-500/10 border-emerald-500/20"
                 : score >= 70
-                ? "text-indigo-500 bg-indigo-500/10 border-indigo-500/20"
-                : score >= 50
-                ? "text-amber-500 bg-amber-500/10 border-amber-500/20"
-                : "text-rose-500 bg-rose-500/10 border-rose-500/20";
+                  ? "text-indigo-500 bg-indigo-500/10 border-indigo-500/20"
+                  : score >= 50
+                    ? "text-amber-500 bg-amber-500/10 border-amber-500/20"
+                    : "text-rose-500 bg-rose-500/10 border-rose-500/20";
 
             return (
               <Card
@@ -250,16 +262,22 @@ function QuizAttemptsPage() {
               >
                 <CardHeader className="space-y-2 pb-3">
                   <div className="flex justify-between items-start gap-2">
-                    <Badge variant="outline" className={`font-semibold capitalize text-[10px] ${getDifficultyColor(quiz.difficulty)}`}>
+                    <Badge
+                      variant="outline"
+                      className={`font-semibold capitalize text-[10px] ${getDifficultyColor(quiz.difficulty)}`}
+                    >
                       {quiz.difficulty}
                     </Badge>
                     <span className="text-[10px] text-muted-foreground font-semibold flex items-center gap-1">
                       <Calendar size={11} />
-                      {new Date(attempt.completedAt).toLocaleDateString(undefined, {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
+                      {new Date(attempt.completedAt).toLocaleDateString(
+                        undefined,
+                        {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        },
+                      )}
                     </span>
                   </div>
 
@@ -276,7 +294,10 @@ function QuizAttemptsPage() {
                   <div className="grid grid-cols-2 gap-2 p-2.5 rounded-lg bg-muted/40 border border-border/40 text-[11px] text-muted-foreground">
                     <div className="flex items-center gap-1.5 font-medium">
                       <Award size={13} className="text-indigo-500" />
-                      <span>Correct: {attempt.correctAnswersCount} / {attempt.totalQuestions}</span>
+                      <span>
+                        Correct: {attempt.correctAnswersCount} /{" "}
+                        {attempt.totalQuestions}
+                      </span>
                     </div>
                     <div className="flex items-center gap-1.5 font-medium">
                       <Clock size={13} className="text-indigo-500" />
@@ -286,7 +307,9 @@ function QuizAttemptsPage() {
                 </CardContent>
 
                 <CardFooter className="pt-3 border-t border-border/50 flex justify-between items-center gap-3 bg-muted/10">
-                  <Badge className={`font-bold text-xs px-2.5 py-1 ${accuracyColor}`}>
+                  <Badge
+                    className={`font-bold text-xs px-2.5 py-1 ${accuracyColor}`}
+                  >
                     {score}% Accuracy
                   </Badge>
 
@@ -297,7 +320,10 @@ function QuizAttemptsPage() {
                     className="h-8 text-xs cursor-pointer hover:bg-indigo-500/10 hover:text-indigo-600 dark:hover:text-indigo-400 font-semibold flex items-center gap-1 group/btn"
                   >
                     Review
-                    <Eye size={12} className="group-hover/btn:scale-110 transition-transform" />
+                    <Eye
+                      size={12}
+                      className="group-hover/btn:scale-110 transition-transform"
+                    />
                   </Button>
                 </CardFooter>
               </Card>
@@ -310,11 +336,12 @@ function QuizAttemptsPage() {
       {selectedAttemptId && (
         <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-md overflow-y-auto flex items-center justify-center p-4 sm:p-6">
           <div className="w-full max-w-2xl bg-card border border-border shadow-2xl rounded-2xl overflow-hidden flex flex-col relative max-h-[90vh]">
-            
             {isLoadingDetails ? (
               <div className="p-12 flex flex-col items-center justify-center space-y-4">
                 <Loading />
-                <p className="text-muted-foreground text-sm">Fetching attempt feedback details...</p>
+                <p className="text-muted-foreground text-sm">
+                  Fetching attempt feedback details...
+                </p>
               </div>
             ) : (
               attemptDetails && (
@@ -361,15 +388,17 @@ function QuizAttemptsPage() {
                               attemptDetails.score >= 85
                                 ? "stroke-emerald-500"
                                 : attemptDetails.score >= 70
-                                ? "stroke-indigo-500"
-                                : attemptDetails.score >= 50
-                                ? "stroke-amber-500"
-                                : "stroke-rose-500"
+                                  ? "stroke-indigo-500"
+                                  : attemptDetails.score >= 50
+                                    ? "stroke-amber-500"
+                                    : "stroke-rose-500"
                             }
                             strokeWidth="6"
                             fill="transparent"
                             strokeDasharray={264}
-                            strokeDashoffset={264 - (264 * attemptDetails.score) / 100}
+                            strokeDashoffset={
+                              264 - (264 * attemptDetails.score) / 100
+                            }
                             strokeLinecap="round"
                             className="transition-all duration-1000"
                           />
@@ -387,13 +416,25 @@ function QuizAttemptsPage() {
                       <div>
                         <h2 className="text-base font-black text-foreground flex items-center justify-center gap-1">
                           {attemptDetails.score >= 85 ? (
-                            <>Outstanding Accuracy! <Smile className="text-emerald-500 w-4 h-4" /></>
+                            <>
+                              Outstanding Accuracy!{" "}
+                              <Smile className="text-emerald-500 w-4 h-4" />
+                            </>
                           ) : attemptDetails.score >= 70 ? (
-                            <>Great work! <Smile className="text-indigo-500 w-4 h-4" /></>
+                            <>
+                              Great work!{" "}
+                              <Smile className="text-indigo-500 w-4 h-4" />
+                            </>
                           ) : attemptDetails.score >= 50 ? (
-                            <>Average Performance <Meh className="text-amber-500 w-4 h-4" /></>
+                            <>
+                              Average Performance{" "}
+                              <Meh className="text-amber-500 w-4 h-4" />
+                            </>
                           ) : (
-                            <>Keep practicing! <Frown className="text-rose-500 w-4 h-4" /></>
+                            <>
+                              Keep practicing!{" "}
+                              <Frown className="text-rose-500 w-4 h-4" />
+                            </>
                           )}
                         </h2>
                       </div>
@@ -404,21 +445,29 @@ function QuizAttemptsPage() {
                     {/* Numerical Stats */}
                     <div className="grid grid-cols-3 gap-3">
                       <div className="p-2.5 rounded-xl border border-border/80 bg-muted/20 text-center">
-                        <div className="text-[9px] font-bold text-muted-foreground uppercase">Correct</div>
+                        <div className="text-[9px] font-bold text-muted-foreground uppercase">
+                          Correct
+                        </div>
                         <div className="text-sm font-extrabold text-foreground mt-0.5">
-                          {attemptDetails.correctAnswersCount} / {attemptDetails.totalQuestions}
+                          {attemptDetails.correctAnswersCount} /{" "}
+                          {attemptDetails.totalQuestions}
                         </div>
                       </div>
                       <div className="p-2.5 rounded-xl border border-border/80 bg-muted/20 text-center">
-                        <div className="text-[9px] font-bold text-muted-foreground uppercase">Time Spent</div>
+                        <div className="text-[9px] font-bold text-muted-foreground uppercase">
+                          Time Spent
+                        </div>
                         <div className="text-sm font-extrabold text-foreground mt-0.5">
                           {formatTime(attemptDetails.timeTaken)}
                         </div>
                       </div>
                       <div className="p-2.5 rounded-xl border border-border/80 bg-muted/20 text-center">
-                        <div className="text-[9px] font-bold text-muted-foreground uppercase">Avg Speed</div>
+                        <div className="text-[9px] font-bold text-muted-foreground uppercase">
+                          Avg Speed
+                        </div>
                         <div className="text-sm font-extrabold text-foreground mt-0.5">
-                          {attemptDetails.timeTaken > 0 && attemptDetails.totalQuestions > 0
+                          {attemptDetails.timeTaken > 0 &&
+                          attemptDetails.totalQuestions > 0
                             ? `${Math.round(attemptDetails.timeTaken / attemptDetails.totalQuestions)}s / Q`
                             : "N/A"}
                         </div>
@@ -433,95 +482,114 @@ function QuizAttemptsPage() {
                       </h3>
 
                       <div className="space-y-4 max-h-[300px] overflow-y-auto pr-1">
-                        {attemptDetails.answers && attemptDetails.answers.map((ans, idx) => {
-                          const q = ans.question;
-                          const isCorrect = ans.isCorrect;
-                          const userChoices = ans.selectedAnswers || [];
-                          const correctChoices = q?.correctAnswer || [];
+                        {attemptDetails.answers &&
+                          attemptDetails.answers.map((ans, idx) => {
+                            const q = ans.question;
+                            const isCorrect = ans.isCorrect;
+                            const userChoices = ans.selectedAnswers || [];
+                            const correctChoices = q?.correctAnswer || [];
 
-                          if (!q) return null;
+                            if (!q) return null;
 
-                          return (
-                            <div
-                              key={idx}
-                              className={`p-3 rounded-lg border transition-colors ${
-                                isCorrect
-                                  ? "border-emerald-500/25 bg-emerald-500/5"
-                                  : "border-rose-500/25 bg-rose-500/5"
-                              }`}
-                            >
-                              {/* Question title index bar */}
-                              <div className="flex justify-between items-center gap-2 pb-1.5 mb-1.5 border-b border-border/30">
-                                <span className="text-[9px] font-bold text-muted-foreground uppercase">
-                                  Question {idx + 1}
-                                </span>
-                                <Badge
-                                  variant="outline"
-                                  className={`text-[8px] font-extrabold gap-1 px-1 py-0 ${
-                                    isCorrect
-                                      ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/25"
-                                      : "bg-rose-500/10 text-rose-600 border-rose-500/25"
-                                  }`}
-                                >
-                                  {isCorrect ? <Check size={8} /> : <X size={8} />}
-                                  {isCorrect ? "Correct" : "Incorrect"}
-                                </Badge>
-                              </div>
-
-                              {/* Question description */}
-                              <h4 className="text-xs font-bold text-foreground leading-snug">
-                                {q.text}
-                              </h4>
-
-                              {/* Options review */}
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mt-2.5">
-                                {q.options.map((opt, optIdx) => {
-                                  const wasSelected = userChoices.includes(optIdx);
-                                  const wasCorrect = correctChoices.includes(optIdx);
-
-                                  let styleClass = "border-border/80 bg-card text-muted-foreground";
-                                  if (wasCorrect) {
-                                    styleClass =
-                                      "border-emerald-500 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-semibold";
-                                  } else if (wasSelected) {
-                                    styleClass =
-                                      "border-rose-500 bg-rose-500/15 text-rose-700 dark:text-rose-300 font-semibold";
-                                  }
-
-                                  return (
-                                    <div
-                                      key={optIdx}
-                                      className={`p-2 rounded border text-[10px] flex items-center justify-between gap-2 ${styleClass}`}
-                                    >
-                                      <span className="truncate flex-1">{opt}</span>
-                                      <div className="shrink-0 flex items-center gap-0.5">
-                                        {wasCorrect && (
-                                          <Check size={10} className="text-emerald-500 font-bold" />
-                                        )}
-                                        {wasSelected && !wasCorrect && (
-                                          <X size={10} className="text-rose-500 font-bold" />
-                                        )}
-                                      </div>
-                                    </div>
-                                  );
-                                })}
-                              </div>
-
-                              {/* Explanation block */}
-                              {q.explanation && (
-                                <div className="mt-2.5 p-2 rounded border border-border/40 bg-muted/60 text-[10px] text-muted-foreground flex gap-1.5">
-                                  <Info size={12} className="shrink-0 text-indigo-500 mt-0.5" />
-                                  <div className="leading-relaxed">
-                                    <strong className="text-foreground font-semibold">
-                                      Explanation:
-                                    </strong>{" "}
-                                    {q.explanation}
-                                  </div>
+                            return (
+                              <div
+                                key={idx}
+                                className={`p-3 rounded-lg border transition-colors ${
+                                  isCorrect
+                                    ? "border-emerald-500/25 bg-emerald-500/5"
+                                    : "border-rose-500/25 bg-rose-500/5"
+                                }`}
+                              >
+                                {/* Question title index bar */}
+                                <div className="flex justify-between items-center gap-2 pb-1.5 mb-1.5 border-b border-border/30">
+                                  <span className="text-[9px] font-bold text-muted-foreground uppercase">
+                                    Question {idx + 1}
+                                  </span>
+                                  <Badge
+                                    variant="outline"
+                                    className={`text-[8px] font-extrabold gap-1 px-1 py-0 ${
+                                      isCorrect
+                                        ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/25"
+                                        : "bg-rose-500/10 text-rose-600 border-rose-500/25"
+                                    }`}
+                                  >
+                                    {isCorrect ? (
+                                      <Check size={8} />
+                                    ) : (
+                                      <X size={8} />
+                                    )}
+                                    {isCorrect ? "Correct" : "Incorrect"}
+                                  </Badge>
                                 </div>
-                              )}
-                            </div>
-                          );
-                        })}
+
+                                {/* Question description */}
+                                <h4 className="text-xs font-bold text-foreground leading-snug">
+                                  {q.text}
+                                </h4>
+
+                                {/* Options review */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mt-2.5">
+                                  {q.options.map((opt, optIdx) => {
+                                    const wasSelected =
+                                      userChoices.includes(optIdx);
+                                    const wasCorrect =
+                                      correctChoices.includes(optIdx);
+
+                                    let styleClass =
+                                      "border-border/80 bg-card text-muted-foreground";
+                                    if (wasCorrect) {
+                                      styleClass =
+                                        "border-emerald-500 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-semibold";
+                                    } else if (wasSelected) {
+                                      styleClass =
+                                        "border-rose-500 bg-rose-500/15 text-rose-700 dark:text-rose-300 font-semibold";
+                                    }
+
+                                    return (
+                                      <div
+                                        key={optIdx}
+                                        className={`p-2 rounded border text-[10px] flex items-center justify-between gap-2 ${styleClass}`}
+                                      >
+                                        <span className="truncate flex-1">
+                                          {opt}
+                                        </span>
+                                        <div className="shrink-0 flex items-center gap-0.5">
+                                          {wasCorrect && (
+                                            <Check
+                                              size={10}
+                                              className="text-emerald-500 font-bold"
+                                            />
+                                          )}
+                                          {wasSelected && !wasCorrect && (
+                                            <X
+                                              size={10}
+                                              className="text-rose-500 font-bold"
+                                            />
+                                          )}
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+
+                                {/* Explanation block */}
+                                {q.explanation && (
+                                  <div className="mt-2.5 p-2 rounded border border-border/40 bg-muted/60 text-[10px] text-muted-foreground flex gap-1.5">
+                                    <Info
+                                      size={12}
+                                      className="shrink-0 text-indigo-500 mt-0.5"
+                                    />
+                                    <div className="leading-relaxed">
+                                      <strong className="text-foreground font-semibold">
+                                        Explanation:
+                                      </strong>{" "}
+                                      {q.explanation}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
                       </div>
                     </div>
                   </div>
