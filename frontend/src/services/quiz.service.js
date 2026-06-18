@@ -77,3 +77,33 @@ export const getAllQuizzes = async (params) => {
   const response = await axiosClient.get('/quizzes', { params });
   return response.data
 }
+
+// start a quiz attempt
+export const startAttempt = async (quizId) => {
+  const response = await axiosClient.post("/attempts", { quizId });
+  return response.data;
+};
+
+// save progressive answers during quiz
+export const saveProgressiveAnswers = async (attemptId, answers) => {
+  const response = await axiosClient.put(`/attempts/${attemptId}/save`, { answers });
+  return response.data;
+};
+
+// submit quiz attempt
+export const submitAttempt = async (attemptId, submissionData) => {
+  const response = await axiosClient.post(`/attempts/${attemptId}/submit`, submissionData);
+  return response.data;
+};
+
+// get attempt result details
+export const getAttemptResult = async (attemptId) => {
+  const response = await axiosClient.get(`/attempts/${attemptId}`);
+  return response.data;
+};
+
+// get single quiz details by ID
+export const getQuizById = async (quizId) => {
+  const response = await axiosClient.get(`/quizzes/${quizId}`);
+  return response.data;
+};
