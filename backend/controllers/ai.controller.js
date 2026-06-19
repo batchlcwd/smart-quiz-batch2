@@ -4,6 +4,7 @@ import openAiClient from "../utils/openConfig.js";
 export const generateQuiz = async (req, resp) => {
   try {
     const { topic, difficulty, numQuestions, categoryId } = req.body;
+
     const creatorId = req.user._id;
 
     if (!topic || !difficulty || !numQuestions || !categoryId) {
@@ -33,35 +34,35 @@ export const generateQuiz = async (req, resp) => {
 };
 
 
-export const askAI=async(req,resp)=>{
-// call ai
+export const askAI = async (req, resp) => {
+  // call ai
 
-if(!req.body?.prompt){
-  return resp.status(400).json({
-    message:"Prompt is required"
+  if (!req.body?.prompt) {
+    return resp.status(400).json({
+      message: "Prompt is required"
+    })
+  }
+
+  const { prompt } = req.body
+
+
+  const response = await openAiClient.responses.create({
+    model: process.env.MODEL_NAME,
+    input: prompt
   })
-}
 
-const {prompt}=req.body
+  console.log(response)
 
+  //save database:
+  await AIResponse.create({
+    prompt: prompt,
+    response: response.output_text,
+    user: req.user._id
+  })
 
-const response=await openAiClient.responses.create({
-   model: process.env.MODEL_NAME,
-   input:prompt
-})
-
-console.log(response)
-
-//save database:
-await AIResponse.create({
-    prompt:prompt,
-    response:response.output_text,
-    user:req.user._id
-})
-
-return resp.status(200).json({
-  status:"success",
-  message:"AI response",
-  data:response.output_text
-})
+  return resp.status(200).json({
+    status: "success",
+    message: "AI response",
+    data: response.output_text
+  })
 }

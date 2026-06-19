@@ -26,7 +26,7 @@ import { exceptionHandler } from "./middlewares/exceptionHandler.middleware.js";
 
 
 app.use(cors({
-  origin:'http://localhost:5173'
+  origin: ['http://localhost:5173', 'https://smart-quiz-frotnend.netlify.app', 'https://substrng.shop', 'https://www.substrng.shop']
 }))
 
 
